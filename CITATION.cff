@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+title: specbeat
+message: >-
+  If you use this software, please cite the paper it accompanies.
+type: software
+authors:
+  - family-names: Shahaf
+    given-names: Sahar
+    email: sashahaf@mpia.de
+    affiliation: Max-Planck-Institut für Astronomie
+repository-code: "https://github.com/saharsh1/specbeat"
+license: MIT
+version: 0.1.0
+abstract: >-
+  A small, simulation-only Python package that reproduces the Fourier-space
+  method for detecting faint spectroscopic companions described in "Faint
+  Companions to Hot Stars".
+preferred-citation:
+  type: article
+  title: "Faint Companions to Hot Stars"
+  authors:
+    - family-names: Shahaf
+      given-names: Sahar
+    - family-names: Rix
+      given-names: Hans-Walter
+    - family-names: Müller-Horn
+      given-names: Johanna
+    - family-names: Villaseñor
+      given-names: Jaime I.
+    - family-names: Shenar
+      given-names: Tomer
+    - family-names: Seeburger
+      given-names: Rhys
