@@ -29,7 +29,7 @@ class TestNoncentrality:
 
 # =============================================================================
 class TestDetectionPower:
-    """spec s3.3: power of the ONE-SIDED CONSTRAINED test."""
+    """Paper Sec. 3 / eq. C.10: power of the ONE-SIDED CONSTRAINED test."""
 
     I_ALPHA = 2500.0
 

@@ -30,7 +30,7 @@ def test_injection_no_null_returns_T_only():
     """Without a null sample, no detection decision is fabricated."""
     s = _setup()
     out = mc.run_injection_mc(
-        alpha=0.2, dv_true=60.0, sigma_pix=s["sigma_pix"], n_pix=s["n_pix"],
+        alpha=0.2, delta_v=60.0, sigma_pix=s["sigma_pix"], n_pix=s["n_pix"],
         dv=s["dv"], v_grid=s["v_grid"], n_draws=20, seed=1,
         template=s["template"])
     assert "T" in out and out["T"].shape == (20,)
@@ -44,7 +44,7 @@ def test_injection_uses_calibrated_scanned_threshold_not_2706():
         s["sigma_pix"], s["n_pix"], s["dv"], s["v_grid"], n_draws=400,
         seed=7, template=s["template"])
     out = mc.run_injection_mc(
-        alpha=0.25, dv_true=60.0, sigma_pix=s["sigma_pix"], n_pix=s["n_pix"],
+        alpha=0.25, delta_v=60.0, sigma_pix=s["sigma_pix"], n_pix=s["n_pix"],
         dv=s["dv"], v_grid=s["v_grid"], n_draws=50, seed=2,
         template=s["template"], null_T=null["T"], fap=0.05)
     assert "detected" in out and "threshold" in out
@@ -72,7 +72,7 @@ def test_completeness_monotone_and_bounded():
     comps = {}
     for alpha in (0.02, 0.5):
         inj = mc.run_injection_mc(
-            alpha=alpha, dv_true=60.0, sigma_pix=s["sigma_pix"], n_pix=s["n_pix"],
+            alpha=alpha, delta_v=60.0, sigma_pix=s["sigma_pix"], n_pix=s["n_pix"],
             dv=s["dv"], v_grid=s["v_grid"], n_draws=300, seed=3,
             template=s["template"])
         c = mc.completeness(inj["T"], thr)
@@ -85,7 +85,7 @@ def test_completeness_monotone_and_bounded():
     # Anti-conservative check: thresholding at the fixed-v 2.706 can only INFLATE
     # completeness relative to the (heavier) calibrated scanned threshold.
     inj_mid = mc.run_injection_mc(
-        alpha=0.15, dv_true=60.0, sigma_pix=s["sigma_pix"], n_pix=s["n_pix"],
+        alpha=0.15, delta_v=60.0, sigma_pix=s["sigma_pix"], n_pix=s["n_pix"],
         dv=s["dv"], v_grid=s["v_grid"], n_draws=300, seed=3,
         template=s["template"])
     c_calib = mc.completeness(inj_mid["T"], thr)

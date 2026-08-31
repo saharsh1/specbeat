@@ -47,6 +47,11 @@ def fourier_log_amplitude(spec, sampling_kms, normalize_to_snr=True,
     -------
     amp, log_amp, zeta, sigma_A : ndarray, ndarray, ndarray, float
     """
+    spec = np.asarray(spec, dtype=float)
+    if spec.ndim != 1:
+        raise NotImplementedError(
+            "specbeat is single-epoch: pass spectra one at a time "
+            f"(got shape {spec.shape})")
     ft = rfft(spec)
     amp = np.abs(ft)
     zeta = rfftfreq(len(spec), d=sampling_kms)
@@ -60,13 +65,16 @@ def fourier_log_amplitude(spec, sampling_kms, normalize_to_snr=True,
     n_tail = max(int(len(amp) * tail_fraction), 10)
     sigma_A = np.median(amp[-n_tail:]) / RAYLEIGH_MEDIAN_TO_SIGMA
 
-    log_amp_raw = np.log(amp)
+    # A noiseless synthetic spectrum can have exactly-zero Fourier amplitudes;
+    # log(0) = -inf is a legitimate value there, so silence the warning.
+    with np.errstate(divide="ignore", invalid="ignore"):
+        log_amp_raw = np.log(amp)
 
-    if normalize_to_snr:
-        # sigma_log = sigma_A / amp  =>  log_amp / sigma_log = log_amp * amp / sigma_A
-        log_amp = log_amp_raw * amp / sigma_A
-    else:
-        log_amp = log_amp_raw
+        if normalize_to_snr:
+            # sigma_log = sigma_A / amp  =>  log_amp / sigma_log = log_amp * amp / sigma_A
+            log_amp = log_amp_raw * amp / sigma_A
+        else:
+            log_amp = log_amp_raw
 
     return amp, log_amp, zeta, sigma_A
 

@@ -24,7 +24,7 @@ __all__ = [
 
 
 def rotational_kernel(zeta, vsini, epsilon, return_log=True):
-    """Rotational broadening kernel in Fourier space (Gray 1976).
+    """Rotational broadening kernel in Fourier space (Gray 1992, ch. 18).
 
     The single definition of the rotational kernel in the package; everything
     else refers to this one.

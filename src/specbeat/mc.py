@@ -135,7 +135,7 @@ def run_null_mc(sigma_pix, n_pix, dv, v_grid, n_draws, *, seed=0, noise="white",
     return out
 
 
-def run_injection_mc(alpha, dv_true, sigma_pix, n_pix, dv, v_grid, n_draws, *,
+def run_injection_mc(alpha, delta_v, sigma_pix, n_pix, dv, v_grid, n_draws, *,
                      seed=0, noise="white", sigma_ft=None, template=None,
                      n_cos_terms=0, n_baseline=2, snr_cutoff=None, zeta_max=None,
                      fap=0.05, null_T=None):
@@ -160,7 +160,7 @@ def run_injection_mc(alpha, dv_true, sigma_pix, n_pix, dv, v_grid, n_draws, *,
     ----------
     alpha : float
         Injected companion amplitude.
-    dv_true : float
+    delta_v : float
         Injected companion separation (km/s).
     sigma_pix, n_pix, dv, v_grid, n_draws, seed, noise, sigma_ft, template,
     n_cos_terms, n_baseline, snr_cutoff, zeta_max :
@@ -187,11 +187,11 @@ def run_injection_mc(alpha, dv_true, sigma_pix, n_pix, dv, v_grid, n_draws, *,
             f"template length {template.size} does not match n_pix={n_pix}"
         )
 
-    # Companion = the primary profile scaled by alpha and shifted by dv_true
+    # Companion = the primary profile scaled by alpha and shifted by delta_v
     # (a pure Fourier phase shift), added under the H0 template.
     zeta = np.fft.rfftfreq(n_pix, d=dv)
     companion = np.fft.irfft(
-        np.fft.rfft(template) * np.exp(-2j * np.pi * zeta * dv_true), n=n_pix)
+        np.fft.rfft(template) * np.exp(-2j * np.pi * zeta * delta_v), n=n_pix)
     injected = template + alpha * companion
 
     T = np.empty(n_draws)

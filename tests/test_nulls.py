@@ -103,7 +103,7 @@ class TestPvalueOneSided:
 
 # =============================================================================
 class TestBoundaryEdgeCase:
-    """spec s3 BOUNDARY: T <= 0 => p == 1, significance == 0 (NOT 0.5)."""
+    """Paper Sec. 3 boundary case: T <= 0 => p == 1, significance == 0 (NOT 0.5)."""
 
     @pytest.mark.parametrize("df", [1, 2, 3])
     def test_pvalue_at_zero_is_one(self, df):
@@ -235,7 +235,7 @@ class TestUpperLimit:
 
 # =============================================================================
 class TestEffectiveChi2:
-    """MC-calibrated effective-chi2 null (spec s5.4)."""
+    """MC-calibrated effective-chi2 cross-check null (companion of paper eq. 16)."""
 
     @pytest.mark.parametrize("T", [0.25, 0.5, 1.0, 2.706, 4.0, 9.0])
     def test_reduces_to_chernoff_df1_via_pvalue(self, T):
@@ -331,7 +331,7 @@ class TestEffectiveChi2:
 
 # =============================================================================
 class TestGammaNullFit:
-    """``fit_gamma_null`` (spec s5.2). floc=0; ks_stat only; warns a<1."""
+    """``fit_gamma_null`` (the Gamma mixture of paper eq. 16). floc=0; ks_stat only; warns a<1."""
 
     def test_returns_expected_keys(self):
         rng = np.random.default_rng(1)

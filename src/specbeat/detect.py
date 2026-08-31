@@ -30,21 +30,6 @@ __all__ = [
 ]
 
 
-def _align_bounds(bounds, p):
-    """Resize a ``(lb, ub)`` pair to length ``p`` by truncation / ``inf``-pad."""
-    if bounds is None:
-        return None
-    lb = np.asarray(bounds[0], dtype=float)
-    ub = np.asarray(bounds[1], dtype=float)
-    if lb.size == p:
-        return lb, ub
-    if lb.size > p:
-        return lb[:p], ub[:p]
-    pad_lb = np.concatenate([lb, np.full(p - lb.size, -np.inf)])
-    pad_ub = np.concatenate([ub, np.full(p - ub.size, np.inf)])
-    return pad_lb, pad_ub
-
-
 def _prepare_ft(spec, dv, sigma_ft, snr_cutoff, zeta_max):
     """Single-epoch FT + truncation + inverse-variance weights.
 
@@ -77,8 +62,8 @@ def _wls_at_v(zeta_fit, log_amp_fit, weights, trial_v, n_cos_terms, n_baseline):
     """Bounded WLS of the eq.-12 design at one trial velocity."""
     M = construct_log_amp_model_matrix(
         zeta_fit, trial_v, n_cos_terms=n_cos_terms, n_baseline=n_baseline)
-    bounds = _align_bounds(
-        make_baseline_bounds(n_baseline, n_cos_terms=n_cos_terms), M.shape[1])
+    # bounded_weighted_least_squares right-pads shorter bounds with ±inf.
+    bounds = make_baseline_bounds(n_baseline, n_cos_terms=n_cos_terms)
     theta, cov, chi2 = bounded_weighted_least_squares(
         M, log_amp_fit, weights, bounds=bounds)
     return theta, cov, chi2
@@ -190,7 +175,9 @@ def c0_index(n_baseline=2, n_cos_terms=0):
 
     Equals the number of baseline columns ``3 + (n_baseline - 2)//2``; the first
     cosine column ``c0`` (the amplitude whose sign the clip rule tests) sits
-    immediately after the baseline block.
+    immediately after the baseline block. ``n_cos_terms`` is accepted for
+    signature symmetry with the design-matrix helpers and does not affect the
+    index.
 
     Parameters
     ----------

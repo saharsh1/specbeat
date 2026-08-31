@@ -223,7 +223,7 @@ def kernel_amp(zeta, vG, gamma, vsini, epsilon, v=0.0):
     return kg * kl * kr
 
 
-def binary_log_amplitude(zeta, alpha, dv, *, vG=3.0, gamma=3.0, vsini=0.0,
+def binary_log_amplitude(zeta, alpha, delta_v, *, vG=3.0, gamma=3.0, vsini=0.0,
                          epsilon=0.5):
     """LSF-limited log-|FT| of a single-star-plus-companion spectrum (paper eq. 12).
 
@@ -241,7 +241,7 @@ def binary_log_amplitude(zeta, alpha, dv, *, vG=3.0, gamma=3.0, vsini=0.0,
         Fourier conjugate axis (s/km), DC dropped.
     alpha : float
         Companion line-depth ratio (paper eq. 12 amplitude).
-    dv : float
+    delta_v : float
         Companion velocity separation ``Δv`` (km/s).
     vG, gamma, vsini, epsilon : float
         Primary kernel parameters (FWHM km/s where applicable).
@@ -253,7 +253,7 @@ def binary_log_amplitude(zeta, alpha, dv, *, vG=3.0, gamma=3.0, vsini=0.0,
     """
     zeta = np.asarray(zeta, dtype=float)
     ln_K = np.log(kernel_amp(zeta, vG, gamma, vsini, epsilon))
-    beat = np.log1p(alpha * np.cos(2.0 * np.pi * zeta * dv))
+    beat = np.log1p(alpha * np.cos(2.0 * np.pi * zeta * delta_v))
     return ln_K + beat
 
 

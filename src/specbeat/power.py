@@ -1,6 +1,6 @@
 """Detection power: non-centrality, constrained power, Fisher information.
 
-Spec s3.3. The alternative has non-centrality ``λ = α²·I_α``; the constrained
+Paper Sec. 3 and App. C.2 (eq. C.10). The alternative has non-centrality ``λ = α²·I_α``; the constrained
 one-sided power is ``Φ̄(√c − √λ)`` with ``c`` from
 :func:`specbeat.nulls.detection_threshold`.
 """

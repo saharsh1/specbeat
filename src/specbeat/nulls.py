@@ -7,8 +7,8 @@ Self & Liang (1987) mixture::
     df = 1 :  T ~ ½·δ(0) + ½·χ²₁
     df > 1 :  T ~ ½·χ²_{df−1} + ½·χ²_df
 
-The paper's multi-window mixture helpers are not included: everything here is
-single-epoch and single-window.
+The multi-epoch, multi-window machinery of the paper's Sec. 4 is not included:
+everything here is single-epoch and single-window.
 """
 
 from __future__ import annotations
