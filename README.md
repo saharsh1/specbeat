@@ -113,7 +113,7 @@ columns for a polynomial correction, but the default fits do not use them.
 pytest -q
 ```
 
-373 tests, about six seconds. They cover the algebra of each fit, the boundary
+377 tests, about seven seconds. They cover the algebra of each fit, the boundary
 statistics against their closed forms, Monte-Carlo recovery of the null
 parameters, and a set of regression tests for mistakes that were made at least
 once while writing this (`tests/test_traps.py`).

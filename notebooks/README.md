@@ -8,17 +8,17 @@ data and runs on its own.
    under a Fourier transform, and broadening kernels multiply so their logs add.
    Then $v\sin i$ from a single line, and the lesson that only what a smooth
    baseline cannot absorb is measurable. §2.1, eqs. 1–8, Figs. 1–2, Apps. A and
-   B.1. About 3 s.
+   C.1. About 3 s.
 
 2. **`02_the_companion_signature.ipynb`** — the companion as a cosine beat in
    the log-amplitude, its two failure modes, and the same signal seen in the
    Fourier phase once the primary velocity is known. §2.2, §3.2, §4.2,
-   eqs. 9–14, Fig. 3, App. C. About 2 s.
+   eqs. 9–14, Fig. 3, App. D. About 2 s.
 
 3. **`03_detection_and_calibration.ipynb`** — how precisely $\alpha$ can be
    measured in each channel; the null distribution of the detection statistic
    when $\alpha\ge0$; and what scanning over $v$ does to it. §3, eqs. 15–19,
-   Figs. 4–5, App. B.2. About 7 s.
+   Figs. 4–5, App. C.2. About 7 s.
 
 Run them from this directory. Monte-Carlo draw counts are sized for a fast
 run-through; production values are noted in the text where it matters.
@@ -41,8 +41,9 @@ it says so and says why.
 
 Velocities in km/s, $\zeta$ in s/km, kernel widths as FWHM in km/s. The Fourier
 grid is `np.fft.rfftfreq(N, d=dv)[1:]`, with the DC bin always dropped. Where
-there is noise, the fit band comes from the SNR rule
-(`truncate_to_snr_cutoff`) rather than a bare $\zeta_{\max}$. Seeds are fixed
+there is noise, the fit band is a fixed limit in $\zeta$, placed where the
+noise-free model amplitude reaches ${\rm SNR}\approx3$ (the paper's App. B
+convention; `truncate_to_snr_cutoff` implements both rules). Seeds are fixed
 throughout. Most quantities are built by hand first and with the library
 second, and the agreement is printed.
 
