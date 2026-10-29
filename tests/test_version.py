@@ -1,4 +1,11 @@
-"""One version string, three declarations: they must agree."""
+"""One version string, three declarations: they must agree.
+
+The version is written by hand in ``pyproject.toml``, ``CITATION.cff`` and
+``specbeat.__version__``, on purpose: the package must import from a plain
+``src`` checkout without being installed, so ``importlib.metadata`` is not an
+option, and a build-time stamp would add tooling to a three-dependency package.
+This test is the single guard that keeps the three copies equal.
+"""
 import pathlib
 import re
 
