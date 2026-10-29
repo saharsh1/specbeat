@@ -9,6 +9,13 @@ authors:
     email: sashahaf@mpia.de
     affiliation: Max-Planck-Institut für Astronomie
 repository-code: "https://github.com/saharsh1/specbeat"
+identifiers:
+  - type: other
+    value: "arXiv:2610.33225"
+    description: The arXiv identifier of the paper this software accompanies.
+  - type: url
+    value: "https://github.com/saharsh1/specbeat"
+    description: The source repository.
 license: MIT
 version: 0.1.0
 abstract: >-
@@ -18,6 +25,11 @@ abstract: >-
 preferred-citation:
   type: article
   title: "Faint Companions to Hot Stars"
+  year: 2026
+  url: "https://arxiv.org/abs/2610.33225"
+  identifiers:
+    - type: other
+      value: "arXiv:2610.33225"
   authors:
     - family-names: Shahaf
       given-names: Sahar

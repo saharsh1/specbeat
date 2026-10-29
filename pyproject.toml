@@ -33,6 +33,7 @@ test = ["pytest>=7.0"]
 [project.urls]
 Homepage = "https://github.com/saharsh1/specbeat"
 Issues = "https://github.com/saharsh1/specbeat/issues"
+Paper = "https://arxiv.org/abs/2610.33225"
 
 [tool.setuptools.packages.find]
 where = ["src"]

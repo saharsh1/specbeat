@@ -6,10 +6,11 @@ companion-to-primary line-depth ratio and whose frequency is the velocity
 separation. `specbeat` implements that measurement and the statistics that go
 with it, on simulated spectra.
 
-It accompanies the paper *Faint Companions to Hot Stars* (Shahaf et al.). The
-paper explains the method; this package lets you run it, break it, and see
-where it stops working. Everything here is simulation — there is no data
-ingestion layer, and reproducing the paper's stellar results is not the point.
+It accompanies the paper *Faint Companions to Hot Stars* (Shahaf et al. 2026,
+[arXiv:2610.33225](https://arxiv.org/abs/2610.33225)). The paper explains the
+method; this package lets you run it, break it, and see where it stops working.
+Everything here is simulation — there is no data ingestion layer, and
+reproducing the paper's stellar results is not the point.
 
 The three notebooks in `notebooks/` are the intended way in.
 
