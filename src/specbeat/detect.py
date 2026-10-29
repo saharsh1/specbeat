@@ -262,6 +262,14 @@ def detection_statistic(spec, dv, v_grid, sigma_ft=None, *, n_cos_terms=0,
     dict
         ``T`` (clipped max), ``v_best``, ``alpha_hat`` (raw at v_best),
         ``sigma_alpha``, ``clip_active`` (bool at v_best), ``sigma_ft``.
+
+    Notes
+    -----
+    ``sigma_alpha`` is the formal WLS error at ``v_best``, built from weights
+    estimated from the Fourier amplitude itself. It is optimistic: on the
+    notebooks' demo line a nominal 68% interval covers the true ``α`` about
+    59% of the time. Treat it as a scale, and calibrate errors and limits by
+    injection (:func:`specbeat.mc.run_injection_mc`) before quoting them.
     """
     scan = _scan(spec, dv, v_grid, sigma_ft, n_cos_terms, n_baseline,
                  snr_cutoff, zeta_max)

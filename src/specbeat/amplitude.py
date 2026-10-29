@@ -182,6 +182,10 @@ def make_baseline_bounds(n_baseline, n_cos_terms=None, signs=(0, -1, -1)):
     ``(0, -1, -1)`` bounds only the baseline ``a1, a2`` (a physically decaying
     Fourier amplitude); the companion cosine columns stay free.
 
+    The default covers the three baseline columns of ``n_baseline <= 3``. For
+    ``n_baseline > 3`` the extra even-order columns are left unbounded unless
+    ``signs`` is given explicitly, one code per baseline column.
+
     Parameters
     ----------
     n_baseline : int

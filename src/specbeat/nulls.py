@@ -151,6 +151,15 @@ def upper_limit(alpha_hat, sigma_alpha, cl=0.95, power_constrained=False):
     -------
     float
         The one-sided upper limit on ``α``.
+
+    Notes
+    -----
+    ``sigma_alpha`` is usually the formal WLS error, built from weights that
+    are themselves estimated from the Fourier amplitude. Those weights make
+    the formal error optimistic: on the notebooks' demo line a nominal 68%
+    interval covers the true ``α`` about 59% of the time. A limit meant to be
+    quoted should be calibrated by injection (:func:`specbeat.mc.run_injection_mc`)
+    rather than read off ``sigma_alpha`` alone.
     """
     s = norm.cdf(alpha_hat / sigma_alpha)
     ul = alpha_hat + sigma_alpha * norm.isf(s * (1.0 - cl))
